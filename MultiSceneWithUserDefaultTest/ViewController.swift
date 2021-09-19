@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet weak var showLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,16 +24,25 @@ class ViewController: UIViewController {
 
     @IBAction func buttonTouched(_ sender: UIButton) {
         showLabel.text = player?.descriptionToPrint() ?? "none"
+        
+        let data = Data(referencing: player!.imageData)
+        imageView.image = UIImage(data: data)
     }
     
     @IBAction func resetButtonTouched(_ sender: UIButton) {
         showLabel.text = ""
+        imageView.image = nil
     }
     
     @IBAction func saveButtonTouched(_ sender: UIButton) {
         
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
+        let fileNames = ["apple", "cherry", "grape", "medal", "orange"]
         
-        sceneDelegate.player = Player(name: "turu", age: Int.random(in: 10...20), gender: .man)
+        let image = UIImage(named: fileNames.randomElement()!)!
+        let data = image.jpegData(compressionQuality: 1)!
+        
+        let nsData = NSData(data: data)
+        sceneDelegate.player = Player(name: "turu", age: Int.random(in: 10...20), city: City(name: "Seoul", num: 1), imageData: nsData)
     }
 }

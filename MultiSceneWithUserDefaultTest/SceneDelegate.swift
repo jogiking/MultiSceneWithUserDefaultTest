@@ -41,7 +41,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     guard let encodedData = UserDefaults.standard.data(forKey: String(describing: Player.self)) else { return }
             do {
                 let newPlayer = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(encodedData) as! Player
-                
+//                let newPlayer = try NSKeyedUnarchiver.unarchivedObject(ofClass: Player.self, from: encodedData)
+
                 player = newPlayer
                 print(#function, #line, "age: ",player?.age)
             } catch {

@@ -7,41 +7,56 @@
 
 import Foundation
 
-
+struct City {
+    var name: String
+    var num: Int
+}
 
 class Player: NSObject, NSCoding {
-    enum Gender: String {
-        case man
-        case woman
-        case other
-    }
     
     func descriptionToPrint() -> String {
-        return "\(name), \(gender), \(age)"
+        return "\(name), \(age), \(city.name)"
     }
 
     var name: String
     var age: Int
-    var gender: String
+    var city: City
+    var imageData: NSData
     
-    init(name: String, age: Int, gender: Gender) {
+    init(name: String, age: Int, city: City, imageData: NSData) {
         self.name = name
         self.age = age
-        self.gender = gender.rawValue
+        self.city = city
+        self.imageData = imageData
     }
     
     func encode(with aCoder: NSCoder) {
         print(#function, #line)
         aCoder.encode(name, forKey: "name")
         aCoder.encode(age, forKey: "age")
-        aCoder.encode(gender, forKey: "gender")
+        
+        aCoder.encode(city.name, forKey: "city_name")
+        aCoder.encode(city.num, forKey: "city_num")
+        
+        aCoder.encode(imageData, forKey: "imageData")
     }
     
     required init?(coder aDecoder: NSCoder) {
         print(#function, #line)
         name = aDecoder.decodeObject(forKey: "name") as! String
         age = aDecoder.decodeInteger(forKey: "age")
-        gender = aDecoder.decodeObject(forKey: "gender") as! String
+        
+        guard let city_name = aDecoder.decodeObject(forKey: "city_name") as? String
+        else {
+            print(#file, #function, #line)
+            return nil
+            
+        }
+        let city_num = aDecoder.decodeInteger(forKey: "city_num")
+        city = City(name: city_name, num: city_num)
+        
+        imageData = aDecoder.decodeObject(forKey: "imageData") as! NSData
+        
     }
     
 }

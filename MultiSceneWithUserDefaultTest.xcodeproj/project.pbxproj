@@ -14,6 +14,11 @@
 		DF283E6226F3932200AC977B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF283E6126F3932200AC977B /* Assets.xcassets */; };
 		DF283E6526F3932300AC977B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF283E6326F3932300AC977B /* LaunchScreen.storyboard */; };
 		DF283E6D26F3998D00AC977B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF283E6C26F3998D00AC977B /* Player.swift */; };
+		DF283E7426F3D84900AC977B /* grape.png in Resources */ = {isa = PBXBuildFile; fileRef = DF283E6F26F3D84900AC977B /* grape.png */; };
+		DF283E7526F3D84900AC977B /* cherry.png in Resources */ = {isa = PBXBuildFile; fileRef = DF283E7026F3D84900AC977B /* cherry.png */; };
+		DF283E7626F3D84900AC977B /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = DF283E7126F3D84900AC977B /* apple.png */; };
+		DF283E7726F3D84900AC977B /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = DF283E7226F3D84900AC977B /* orange.png */; };
+		DF283E7826F3D84900AC977B /* medal.png in Resources */ = {isa = PBXBuildFile; fileRef = DF283E7326F3D84900AC977B /* medal.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,11 @@
 		DF283E6426F3932300AC977B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF283E6626F3932300AC977B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF283E6C26F3998D00AC977B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		DF283E6F26F3D84900AC977B /* grape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grape.png; sourceTree = "<group>"; };
+		DF283E7026F3D84900AC977B /* cherry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cherry.png; sourceTree = "<group>"; };
+		DF283E7126F3D84900AC977B /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apple.png; sourceTree = "<group>"; };
+		DF283E7226F3D84900AC977B /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
+		DF283E7326F3D84900AC977B /* medal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = medal.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +68,7 @@
 		DF283E5726F3932100AC977B /* MultiSceneWithUserDefaultTest */ = {
 			isa = PBXGroup;
 			children = (
+				DF283E6E26F3D7F800AC977B /* Images */,
 				DF283E5826F3932100AC977B /* AppDelegate.swift */,
 				DF283E5A26F3932100AC977B /* SceneDelegate.swift */,
 				DF283E6C26F3998D00AC977B /* Player.swift */,
@@ -68,6 +79,18 @@
 				DF283E6626F3932300AC977B /* Info.plist */,
 			);
 			path = MultiSceneWithUserDefaultTest;
+			sourceTree = "<group>";
+		};
+		DF283E6E26F3D7F800AC977B /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DF283E7126F3D84900AC977B /* apple.png */,
+				DF283E7026F3D84900AC977B /* cherry.png */,
+				DF283E6F26F3D84900AC977B /* grape.png */,
+				DF283E7326F3D84900AC977B /* medal.png */,
+				DF283E7226F3D84900AC977B /* orange.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,6 +153,11 @@
 				DF283E6526F3932300AC977B /* LaunchScreen.storyboard in Resources */,
 				DF283E6226F3932200AC977B /* Assets.xcassets in Resources */,
 				DF283E6026F3932100AC977B /* Main.storyboard in Resources */,
+				DF283E7426F3D84900AC977B /* grape.png in Resources */,
+				DF283E7626F3D84900AC977B /* apple.png in Resources */,
+				DF283E7526F3D84900AC977B /* cherry.png in Resources */,
+				DF283E7726F3D84900AC977B /* orange.png in Resources */,
+				DF283E7826F3D84900AC977B /* medal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
