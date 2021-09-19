@@ -25,8 +25,7 @@ class ViewController: UIViewController {
     @IBAction func buttonTouched(_ sender: UIButton) {
         showLabel.text = player?.descriptionToPrint() ?? "none"
         
-        let data = Data(referencing: player!.imageData)
-        imageView.image = UIImage(data: data)
+        imageView.image = UIImage(data: player!.imageData)
     }
     
     @IBAction func resetButtonTouched(_ sender: UIButton) {
@@ -42,7 +41,6 @@ class ViewController: UIViewController {
         let image = UIImage(named: fileNames.randomElement()!)!
         let data = image.jpegData(compressionQuality: 1)!
         
-        let nsData = NSData(data: data)
-        sceneDelegate.player = Player(name: "turu", age: Int.random(in: 10...20), city: City(name: "Seoul", num: 1), imageData: nsData)
+        sceneDelegate.player = Player(name: "turu", age: Int.random(in: 10...20), city: City(name: "Seoul", num: 1), imageData: data)
     }
 }

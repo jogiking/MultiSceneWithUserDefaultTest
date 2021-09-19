@@ -21,9 +21,9 @@ class Player: NSObject, NSCoding {
     var name: String
     var age: Int
     var city: City
-    var imageData: NSData
+    var imageData: Data
     
-    init(name: String, age: Int, city: City, imageData: NSData) {
+    init(name: String, age: Int, city: City, imageData: Data) {
         self.name = name
         self.age = age
         self.city = city
@@ -55,7 +55,7 @@ class Player: NSObject, NSCoding {
         let city_num = aDecoder.decodeInteger(forKey: "city_num")
         city = City(name: city_name, num: city_num)
         
-        imageData = aDecoder.decodeObject(forKey: "imageData") as! NSData
+        imageData = aDecoder.decodeObject(forKey: "imageData") as! Data
         
     }
     
