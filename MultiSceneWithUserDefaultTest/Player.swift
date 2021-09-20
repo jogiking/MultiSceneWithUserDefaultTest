@@ -35,9 +35,12 @@ class Player: NSObject, NSCoding {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(age, forKey: "age")
         
-        let jsonEncoder = JSONEncoder()
-        let cityData = try! jsonEncoder.encode(city)
-        aCoder.encode(cityData, forKey: "city")
+        do {
+            let cityData = try PropertyListEncoder.init().encode(city)
+            aCoder.encode(cityData, forKey: "city")
+        } catch {
+            print(#function, #line)
+        }
         
         aCoder.encode(imageData, forKey: "imageData")
     }
@@ -47,13 +50,8 @@ class Player: NSObject, NSCoding {
         name = aDecoder.decodeObject(forKey: "name") as! String
         age = aDecoder.decodeInteger(forKey: "age")
 
-        do {
-            let jsonDecoder = JSONDecoder()
-            let cityData = aDecoder.decodeObject(forKey: "city") as! Data
-            self.city = try jsonDecoder.decode(City.self, from: cityData)
-        } catch {
-            self.city = City(name: "error", num: 10)
-        }
+        let cityData = aDecoder.decodeObject(forKey: "city") as! Data
+        city = try! PropertyListDecoder.init().decode(City.self, from: cityData)
         
         imageData = aDecoder.decodeObject(forKey: "imageData") as! Data
         
