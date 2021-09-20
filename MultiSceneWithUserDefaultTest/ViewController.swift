@@ -37,10 +37,15 @@ class ViewController: UIViewController {
         
         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
         let fileNames = ["apple", "cherry", "grape", "medal", "orange"]
+        let cities = ["Seoul", "Busan", "Jeju"]
         
         let image = UIImage(named: fileNames.randomElement()!)!
+        let cityName = cities.randomElement()!
         let data = image.jpegData(compressionQuality: 1)!
         
-        sceneDelegate.player = Player(name: "turu", age: Int.random(in: 10...20), city: City(name: "Seoul", num: 1), imageData: data)
+        sceneDelegate.player = Player(name: "turu",
+                                      age: Int.random(in: 10...20),
+                                      city: City(name: cityName, num: 1),
+                                      imageData: data)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct City {
+struct City: Codable {
     var name: String
     var num: Int
 }
@@ -35,8 +35,9 @@ class Player: NSObject, NSCoding {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(age, forKey: "age")
         
-        aCoder.encode(city.name, forKey: "city_name")
-        aCoder.encode(city.num, forKey: "city_num")
+        let jsonEncoder = JSONEncoder()
+        let cityData = try! jsonEncoder.encode(city)
+        aCoder.encode(cityData, forKey: "city")
         
         aCoder.encode(imageData, forKey: "imageData")
     }
@@ -45,15 +46,14 @@ class Player: NSObject, NSCoding {
         print(#function, #line)
         name = aDecoder.decodeObject(forKey: "name") as! String
         age = aDecoder.decodeInteger(forKey: "age")
-        
-        guard let city_name = aDecoder.decodeObject(forKey: "city_name") as? String
-        else {
-            print(#file, #function, #line)
-            return nil
-            
+
+        do {
+            let jsonDecoder = JSONDecoder()
+            let cityData = aDecoder.decodeObject(forKey: "city") as! Data
+            self.city = try jsonDecoder.decode(City.self, from: cityData)
+        } catch {
+            self.city = City(name: "error", num: 10)
         }
-        let city_num = aDecoder.decodeInteger(forKey: "city_num")
-        city = City(name: city_name, num: city_num)
         
         imageData = aDecoder.decodeObject(forKey: "imageData") as! Data
         
