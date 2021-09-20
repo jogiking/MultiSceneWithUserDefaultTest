@@ -15,7 +15,7 @@ struct City: Codable {
 class Player: NSObject, NSCoding {
     
     func descriptionToPrint() -> String {
-        return "\(name), \(age), \(city.name)"
+        return "\(name), \(age), city: \(city)"
     }
 
     var name: String

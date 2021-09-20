@@ -11,7 +11,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    var player: Player?
+    var player: Player? {
+        didSet {
+            print(#function, #line)
+            let text = player?.descriptionToPrint()
+            let data = player?.imageData
+            NotificationCenter.default.post(name: .didUpdateUI, object: (text, data))
+        }
+    }
 
     // 1
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -82,6 +89,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
     }
 
-
 }
 
+extension Notification.Name {
+    static let didUpdateUI = Notification.Name("didUpdateUI")
+}

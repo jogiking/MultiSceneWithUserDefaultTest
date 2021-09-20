@@ -19,13 +19,26 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    }
-
-    @IBAction func buttonTouched(_ sender: UIButton) {
-        showLabel.text = player?.descriptionToPrint() ?? "none"
         
-        imageView.image = UIImage(data: player!.imageData)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI(_:)), name: .didUpdateUI, object: nil)
+    }
+    
+    @objc func updateUI(_ notification: Notification) {
+        print(#function, #line)
+        if let (text, data) = notification.object as? (String, Data) {
+            drawUI(text: text, imageData: data)
+        }
+    }
+    
+    private func drawUI(text: String, imageData: Data) {
+        showLabel.text = text
+        imageView.image = UIImage(data: imageData)
+    }
+ 
+    @IBAction func buttonTouched(_ sender: UIButton) {
+        let text = player?.descriptionToPrint() ?? "none"
+        let data = player!.imageData
+        drawUI(text: text, imageData: data)
     }
     
     @IBAction func resetButtonTouched(_ sender: UIButton) {
