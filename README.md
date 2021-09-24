@@ -12,3 +12,8 @@
 2. 앱을 실행하고 데이터를 추가한 뒤, 그대로 background로 이동한다
     - 자동으로 데이터 저장이 되어야 한다
 
+## multiScene 브랜치 실행화면
+
+| 새로운 scene에도 화면 갱신이 일어남 |
+|--|
+|<img src = "https://user-images.githubusercontent.com/38206212/134629357-46fa8503-3d96-4b84-8dfa-f53157694797.gif">  |
