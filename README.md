@@ -1,6 +1,6 @@
 # MultiSceneWithUserDefaultTest
 - 실행환경: 아이패드 에어 4세대(iOS 14.5)
-- 화면모드: Landscape left + right
+- 화면모드: Landscape left + right, Portrait(안하면 한 화면에 2개 scene 두는게 불가)
 
 ## 최종 테스트 목표
 1. 멀티 씬 기능이 있는 앱을 구현한다
