@@ -36,8 +36,9 @@ class ViewController: UIViewController {
     }
  
     @IBAction func buttonTouched(_ sender: UIButton) {
-        let text = player?.descriptionToPrint() ?? "none"
-        let data = player!.imageData
+        guard let player = player else { return }
+        let text = player.descriptionToPrint()
+        let data = player.imageData
         drawUI(text: text, imageData: data)
     }
     

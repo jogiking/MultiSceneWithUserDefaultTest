@@ -19,18 +19,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             NotificationCenter.default.post(name: .didUpdateUI, object: (text, data))
         }
     }
-
+    
     // 1
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        print(#function, #line)
+        
+        
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        // This delegate does not imply the connecting scene or session are new (see application:configurationForConnectingSceneSession` instead).
+//        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        let classInstanceAddress = MemoryAddress(of: self) // and not &classInstance
+        print(#function, #line, classInstanceAddress)
+        
+        if let windowScene = scene as? UIWindowScene {
+            let window = UIWindow(windowScene: windowScene)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+            window.rootViewController = // ViewController()
+                storyboard.instantiateViewController(withIdentifier: "testVC")
+                //UINavigationController(rootViewController: ViewController()) // ViewController()
+            window.backgroundColor = .white
+            self.window = window
+            window.makeKeyAndVisible()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
-        print(#function, #line)
+        let classInstanceAddress = MemoryAddress(of: self) // and not &classInstance
+        print(#function, #line, classInstanceAddress)
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
@@ -39,7 +56,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // 3
     func sceneDidBecomeActive(_ scene: UIScene) {
-        print(#function, #line)
+        let classInstanceAddress = MemoryAddress(of: self) // and not &classInstance
+        print(#function, #line, classInstanceAddress)
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
         
@@ -60,14 +78,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // 4
     func sceneWillResignActive(_ scene: UIScene) {
-        print(#function, #line)
+        let classInstanceAddress = MemoryAddress(of: self) // and not &classInstance
+        print(#function, #line, classInstanceAddress)
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
-        
+        guard let player = player else { return }
         do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: player!, requiringSecureCoding: false)
+            let data = try NSKeyedArchiver.archivedData(withRootObject: player, requiringSecureCoding: false)
             UserDefaults.standard.set(data, forKey: String(describing: Player.self))
-            print(#function, #line, player?.age)
+            print(#function, #line, player.age)
         } catch {
             print(error, #function, #line)
         }
@@ -93,4 +112,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension Notification.Name {
     static let didUpdateUI = Notification.Name("didUpdateUI")
+}
+
+
+struct MemoryAddress<T>: CustomStringConvertible {
+
+    let intValue: Int
+
+    var description: String {
+        let length = 2 + 2 * MemoryLayout<UnsafeRawPointer>.size
+        return String(format: "%0\(length)p", intValue)
+    }
+
+    // for structures
+    init(of structPointer: UnsafePointer<T>) {
+        intValue = Int(bitPattern: structPointer)
+    }
+}
+
+extension MemoryAddress where T: AnyObject {
+
+    // for classes
+    init(of classInstance: T) {
+        intValue = unsafeBitCast(classInstance, to: Int.self)
+        // or      Int(bitPattern: Unmanaged<T>.passUnretained(classInstance).toOpaque())
+    }
 }
